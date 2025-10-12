@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import {React, useState} from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import BorderAnimatedContainer from '../components/BorderAnimatedContainer'
-import { MessageCircleIcon, LockIcon, MailIcon, LoaderIcon } from 'lucide-react'
+import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon } from 'lucide-react'
 
 function LoginPage() {
-  const [formData, setFormData] = useState({ email: "", password: "" })
+ const [formData, setFormData] = useState({  email: "", password: "" })
   const { login, isLoggingIn } = useAuthStore()
 
   const handleSubmit = (e) => {
@@ -25,13 +25,14 @@ function LoginPage() {
                 <div className="text-center mb-10">
                   <MessageCircleIcon className="w-16 h-16 mx-auto text-cyan-400 mb-4 animate-pulse drop-shadow-[0_0_15px_rgba(56,189,248,0.6)]" />
                   <h2 className="text-3xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.6)] mb-2">
-                    Welcome Back
+                    Create Account
                   </h2>
-                  <p className="text-slate-400">Login to access your account</p>
+                  <p className="text-slate-400">Join us and get started today</p>
                 </div>
 
-                {/* Login Form */}
+                {/* Signup Form */}
                 <form className="space-y-6 mt-6" onSubmit={handleSubmit}>
+
                   {/* Email */}
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
@@ -43,6 +44,7 @@ function LoginPage() {
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full pl-10 pr-4 py-3 bg-slate-800/60 border border-slate-700/50 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 hover:bg-slate-800/80 shadow-[0_0_10px_-2px_rgba(56,189,248,0.3)]"
                         placeholder="example@email.com"
+                        required
                       />
                     </div>
                   </div>
@@ -58,6 +60,7 @@ function LoginPage() {
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         className="w-full pl-10 pr-4 py-3 bg-slate-800/60 border border-slate-700/50 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 hover:bg-slate-800/80 shadow-[0_0_10px_-2px_rgba(56,189,248,0.3)]"
                         placeholder="••••••••"
+                        required
                       />
                     </div>
                   </div>
@@ -71,7 +74,7 @@ function LoginPage() {
                     {isLoggingIn ? (
                       <>
                         <LoaderIcon className="w-5 h-5 animate-spin" />
-                        <span>Logging in...</span>
+                        <span>Logging In...</span>
                       </>
                     ) : (
                       <span>Login</span>
@@ -79,10 +82,10 @@ function LoginPage() {
                   </button>
                 </form>
 
-                {/* Sign Up Link */}
+                {/* Login Link */}
                 <div className="mt-6 text-center">
                   <p className="text-slate-400 text-sm">
-                    Don’t have an account?{' '}
+                    Don't have an account?{' '}
                     <a
                       href="/signup"
                       className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
@@ -100,7 +103,7 @@ function LoginPage() {
                 Welcome to Our Platform
               </h3>
               <p className="text-slate-300 max-w-sm mx-auto leading-relaxed">
-                Login to access amazing features, connect with others, and continue your journey with us.
+                Sign up to access amazing features, connect with others, and start your journey with us.
               </p>
             </div>
           </div>

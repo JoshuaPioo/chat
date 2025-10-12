@@ -11,8 +11,8 @@
     @apply absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-5;
 }
 
-.auth-input-label{
-    @apply block texm-sm font-medium text-slate-300 mb-2;
+.auth-input-label {
+    @apply block text-sm font-medium text-slate-300 mb-2;
 }
 
 .auth-badge {
