@@ -25,9 +25,9 @@ function LoginPage() {
                 <div className="text-center mb-10">
                   <MessageCircleIcon className="w-16 h-16 mx-auto text-cyan-400 mb-4 animate-pulse drop-shadow-[0_0_15px_rgba(56,189,248,0.6)]" />
                   <h2 className="text-3xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.6)] mb-2">
-                    Welcome to our Chat App
+                    Welcome back
                   </h2>
-                  <p className="text-slate-400">Join us and get started today</p>
+                  <p className="text-slate-400">Sign in to your account</p>
                 </div>
 
                 {/* Signup Form */}
