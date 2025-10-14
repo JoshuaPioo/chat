@@ -36,7 +36,7 @@ export const useChatStore = create((set, get) => ({
   getMyChatPartners: async () => {
     set({ isUsersLoading: true });
     try {
-      const res = await axiosInstance.get("/messages/contacts");
+      const res = await axiosInstance.get("/messages/chats");
       set({ chats: res.data });
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch chats");
@@ -45,3 +45,5 @@ export const useChatStore = create((set, get) => ({
     }
   },
 }));
+
+
