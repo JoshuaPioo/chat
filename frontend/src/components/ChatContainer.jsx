@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import ChatHeader from "./ChatHeader";
-import NoChatsFound from "./NoChatsFound";
 import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceHolder";
 import MessageInput from "./MessageInput";
 
@@ -15,11 +14,12 @@ function ChatContainer() {
   }, [selectedUser, getMessagesByUserId]);
 
   return (
-    <>
+    <div className="flex flex-col h-screen bg-slate-950">
+      {/* Header fixed at top */}
       <ChatHeader />
 
-      <div className="flex-1 overflow-y-auto px-6 pt-20 pb-10 space-y-6">
-
+      {/* Scrollable message area */}
+      <div className="flex-1 overflow-y-auto px-6 pt-20 pb-25 space-y-4">
         {messages.length > 0 && !isMessagesLoading ? (
           <div className="max-w-3xl mx-auto space-y-6">
             {messages.map((msg) => (
@@ -59,8 +59,9 @@ function ChatContainer() {
         )}
       </div>
 
-      <MessageInput/>
-    </>
+      {/* Fixed message input bar */}
+      <MessageInput />
+    </div>
   );
 }
 
