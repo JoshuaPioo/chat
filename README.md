@@ -1,1 +1,0 @@
-Pampa daily
