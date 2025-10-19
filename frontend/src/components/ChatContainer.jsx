@@ -4,7 +4,6 @@ import { useAuthStore } from "../store/useAuthStore";
 import ChatHeader from "./ChatHeader";
 import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceHolder";
 import MessageInput from "./MessageInput";
-//import { useRef } from "react";
 
 function ChatContainer() {
   const {
@@ -15,35 +14,38 @@ function ChatContainer() {
     subscribeToMessages,
     unsubscribeFromMessages,
   } = useChatStore();
+
   const { authUser } = useAuthStore();
-  //const messageEndRef = useRef(null);
 
   useEffect(() => {
+    if (!selectedUser?._id) return;
     getMessagesByUserId(selectedUser._id);
     subscribeToMessages();
 
-    // clean up
+    // Cleanup
     return () => unsubscribeFromMessages();
   }, [selectedUser, getMessagesByUserId, subscribeToMessages, unsubscribeFromMessages]);
 
-  
-  /*useEffect(() => {
-    if (messageEndRef.current) {
-      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);*/
-
   return (
-    <div className="flex flex-col h-screen bg-slate-950"> 
-      <ChatHeader />
+    <div className="relative flex flex-col h-screen bg-slate-950 text-slate-100">
+      {/* Fixed Header */}
+      <div className="absolute top-0 left-0 right-0 z-20">
+        <ChatHeader />
+      </div>
 
-      {/* Scrollable message area */}
-      <div className="
-    flex-1 overflow-y-auto 
-    px-3 pt-16 pb-50    /* base (mobile) */
-    sm:px-6 sm:pt-20 sm:pb-25  /* larger screens */
-    space-y-4
-  ">
+      {/* Scrollable Message Area */}
+      <div
+        className="
+          absolute left-0 right-0 
+          overflow-y-auto space-y-4
+
+          /* Mobile (<=640px) */
+          top-[4rem] bottom-[5rem] px-3 pt-16 pb-20
+
+          /* Larger screens */
+          sm:top-[5rem] sm:bottom-[6rem] sm:px-6 sm:pt-20 sm:pb-5
+        "
+      >
         {messages.length > 0 && !isMessagesLoading ? (
           <div className="max-w-3xl mx-auto space-y-6">
             {messages.map((msg) => (
@@ -77,14 +79,16 @@ function ChatContainer() {
                 </div>
               </div>
             ))}
-            
-            <div /* (Scroll sample)ref={messageEndRef}*//>
           </div>
         ) : (
           <NoChatHistoryPlaceholder name={selectedUser.fullname} />
         )}
       </div>
-      <MessageInput />
+
+      {/* Fixed Input */}
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        <MessageInput />
+      </div>
     </div>
   );
 }

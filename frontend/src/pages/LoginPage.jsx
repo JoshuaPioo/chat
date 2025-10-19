@@ -98,7 +98,7 @@ function LoginPage() {
             </div>
 
             {/* Right Section - Welcome Text */}
-            <div className="md:w-1/2 flex flex-col items-center justify-center p-10 bg-gradient-to-br from-cyan-900/10 to-purple-900/10 text-center backdrop-blur-md">
+            <div className="hidden md:flex md:w-1/2 flex-col items-center justify-center p-10 bg-gradient-to-br from-cyan-900/10 to-purple-900/10 text-center backdrop-blur-md">
               <h3 className="text-2xl font-bold text-cyan-400 mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]">
                 Welcome to Our Platform
               </h3>
