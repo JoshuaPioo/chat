@@ -4,20 +4,29 @@ import { useAuthStore } from "../store/useAuthStore";
 import ChatHeader from "./ChatHeader";
 import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceHolder";
 import MessageInput from "./MessageInput";
-import { useRef } from "react";
+//import { useRef } from "react";
 
 function ChatContainer() {
-  const { selectedUser, getMessagesByUserId, messages, isMessagesLoading } = useChatStore();
+  const {
+    selectedUser,
+    getMessagesByUserId,
+    messages,
+    isMessagesLoading,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
- // const messageEndRef = useRef(null);
+  //const messageEndRef = useRef(null);
 
-
-  
   useEffect(() => {
     getMessagesByUserId(selectedUser._id);
-  }, [selectedUser, getMessagesByUserId]);
+    subscribeToMessages();
 
-  //Scroll Effect
+    // clean up
+    return () => unsubscribeFromMessages();
+  }, [selectedUser, getMessagesByUserId, subscribeToMessages, unsubscribeFromMessages]);
+
+  
   /*useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -25,12 +34,16 @@ function ChatContainer() {
   }, [messages]);*/
 
   return (
-    <div className="flex flex-col h-screen bg-slate-950">
-      {/* Header fixed at top */}
+    <div className="flex flex-col h-screen bg-slate-950"> 
       <ChatHeader />
 
       {/* Scrollable message area */}
-      <div className="flex-1 overflow-y-auto px-6 pt-20 pb-25 space-y-4">
+      <div className="
+    flex-1 overflow-y-auto 
+    px-3 pt-16 pb-50    /* base (mobile) */
+    sm:px-6 sm:pt-20 sm:pb-25  /* larger screens */
+    space-y-4
+  ">
         {messages.length > 0 && !isMessagesLoading ? (
           <div className="max-w-3xl mx-auto space-y-6">
             {messages.map((msg) => (
@@ -71,8 +84,6 @@ function ChatContainer() {
           <NoChatHistoryPlaceholder name={selectedUser.fullname} />
         )}
       </div>
-
-      {/* Fixed message input bar */}
       <MessageInput />
     </div>
   );
