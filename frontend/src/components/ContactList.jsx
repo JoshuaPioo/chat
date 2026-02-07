@@ -15,7 +15,7 @@ function ContactList() {
   if (isUsersLoading) return <UsersLoadingSkeleton />;
 
   return (
-     <>
+    <>
       {allContacts.map((contact) => (
         <div
           key={contact._id}
@@ -23,17 +23,25 @@ function ContactList() {
           onClick={() => setSelectedUser(contact)}
         >
           <div className="flex items-center gap-3">
-            <div className={`profile ${onlineUsers.includes(contact._id) ? "online" : "offline"}`}>
-              <div className="size-12 rounded-full">
-                <img src={contact.profilePic || "/profile.png"} alt={contact.fullname} />
+            <div
+              className={`profile ${onlineUsers.includes(contact._id) ? "online" : "offline"}`}
+            >
+              <div className="size-12 rounded-full overflow-hidden">
+                <img
+                  src={contact.profilePic || "/profile.png"}
+                  alt={contact.fullname}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-            <h4 className="text-slate-200 font-medium truncate">{contact.fullname}</h4>
+            <h4 className="text-slate-200 font-medium truncate">
+              {contact.fullname}
+            </h4>
           </div>
         </div>
       ))}
     </>
-  )
+  );
 }
 
 export default ContactList
